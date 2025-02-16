@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Data User</h1>
+    <form>
+      <span>
+        <label for="name">Nama</label>
+        <input
+          data-id
+          id="name"
+          type="text"
+          placeholder="Masukkan nama"
+          required
+        />
+      </span>
+      <span style="margin-left: 1rem">
+        <label for="email">Email</label>
+        <input
+          data-id
+          id="email"
+          type="text"
+          placeholder="Masukkan email"
+          required
+        />
+      </span>
+      <span style="margin-left: 1rem">
+        <label for="gender">Gender</label>
+        <input
+          data-id
+          id="gender"
+          type="text"
+          placeholder="Masukkan gender"
+          required
+        />
+      </span>
+      <button type="submit">Simpan</button>
+    </form>
+    <main style="margin-top: 1rem">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th colspan="2">Option</th>
+          </tr>
+        </thead>
+        <tbody id="table-user"></tbody>
+      </table>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
