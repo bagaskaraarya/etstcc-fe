@@ -1,7 +1,7 @@
 // Ngambil elemen form
 const formulir = document.querySelector("form");
 
-// // Bikin trigger event submit pada elemen form
+// Bikin trigger event submit pada elemen form
 formulir.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -51,24 +51,24 @@ formulir.addEventListener("submit", (e) => {
 });
 
 // GET User
-function getUser() {
-  axios
-    .get("http://localhost:5000/users")
-    .then(({ data }) => {
-      const table = document.querySelector("#table-user");
-      let tampilan = "";
-      let no = 1;
+async function getUser() {
+  try {
+    const { data } = await axios.get("http://localhost:5000/users");
 
-      for (const user of data) {
-        tampilan += tampilkanUser(no, user);
-        no++;
-      }
-      table.innerHTML = tampilan;
+    const table = document.querySelector("#table-user");
+    let tampilan = "";
+    let no = 1;
 
-      hapusUser();
-      editUser();
-    })
-    .catch((error) => console.log(error.message));
+    for (const user of await data) {
+      tampilan += tampilkanUser(no, user);
+      no++;
+    }
+    table.innerHTML = tampilan;
+    hapusUser();
+    editUser();
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 function tampilkanUser(no, user) {
