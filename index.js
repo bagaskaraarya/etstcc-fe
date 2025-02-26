@@ -17,12 +17,12 @@ formulir.addEventListener("submit", (e) => {
 
   const id = elemen_name.dataset.id; // <- Khusus edit
 
-  // Ngecek apakah harus POST atau PATCH
+  // Ngecek apakah harus POST atau PUT
   // Kalo id kosong, jadinya POST
   if (id == "") {
     // Tambah user
     axios
-      .post("http://localhost:5000/users", { name, email, gender })
+      .post("http://localhost:5000/add-user", { name, email, gender })
       .then(() => {
         // bersihin formnya
         elemen_name.value = "";
@@ -35,7 +35,7 @@ formulir.addEventListener("submit", (e) => {
       .catch((error) => console.log(error.message)); // <- Kalo ada error
   } else {
     axios
-      .patch(`http://localhost:5000/users/${id}`, { name, email, gender })
+      .put(`http://localhost:5000/edit-user/${id}`, { name, email, gender })
       .then(() => {
         // bersihin formnya
         elemen_name.dataset.id = "";
@@ -91,7 +91,7 @@ function hapusUser() {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       axios
-        .delete(`http://localhost:5000/users/${id}`)
+        .delete(`http://localhost:5000/delete-user/${id}`)
         .then(() => getUser())
         .catch((error) => console.log(error));
     });
