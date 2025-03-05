@@ -4,7 +4,7 @@
 
 Silakan deploy repository ini melalui Compute Engine. Repository ini merupakan sebuah implementasi Front-end sederhana dari praktik Back-end yang telah kita lakukan pada pertemuan 2 dan 3. Untuk Back-end **TIDAK PERLU** ikut di-deploy ke VM, cukup dijalankan secara local.
 
-File Back-end dapat di-download melalui link di bawah:
+File Back-end dapat di-download melalui link ini:
 https://github.com/plirapli/asisten-tcc-2-api-be
 
 Silakan ikuti instruksi yg terdapat pada README.
