@@ -1,3 +1,12 @@
+let port = 5000;
+
+document.addEventListener("DOMContentLoaded", (e) => {
+  port = prompt(
+    'Masukkan port Back-End \nPort dapat dilihat pada file index.js pada bagian "app.listen" \n\nNilai default-nya adalah 5000'
+  );
+  getUser();
+});
+
 // Ngambil elemen form
 const formulir = document.querySelector("form");
 
@@ -22,7 +31,7 @@ formulir.addEventListener("submit", (e) => {
   if (id == "") {
     // Tambah user
     axios
-      .post("http://localhost:5000/add-user", { name, email, gender })
+      .post(`http://localhost:${port}/add-user`, { name, email, gender })
       .then(() => {
         // bersihin formnya
         elemen_name.value = "";
@@ -35,7 +44,7 @@ formulir.addEventListener("submit", (e) => {
       .catch((error) => console.log(error.message)); // <- Kalo ada error
   } else {
     axios
-      .put(`http://localhost:5000/edit-user/${id}`, { name, email, gender })
+      .put(`http://localhost:${port}/edit-user/${id}`, { name, email, gender })
       .then(() => {
         // bersihin formnya
         elemen_name.dataset.id = "";
@@ -53,7 +62,7 @@ formulir.addEventListener("submit", (e) => {
 // GET User
 async function getUser() {
   try {
-    const { data } = await axios.get("http://localhost:5000/users");
+    const { data } = await axios.get(`http://localhost:${port}/users`);
 
     const table = document.querySelector("#table-user");
     let tampilan = "";
@@ -91,7 +100,7 @@ function hapusUser() {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       axios
-        .delete(`http://localhost:5000/delete-user/${id}`)
+        .delete(`http://localhost:${port}/delete-user/${id}`)
         .then(() => getUser())
         .catch((error) => console.log(error));
     });
@@ -131,5 +140,3 @@ function editUser() {
     });
   });
 }
-
-getUser();
