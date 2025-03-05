@@ -1,4 +1,13 @@
-# Praktikum TCC Pertemuan 2
+# Praktikum TCC
+
+## Tugas 4
+
+Silakan deploy repository ini melalui Compute Engine. Repository ini merupakan sebuah implementasi Front-end sederhana dari praktik Back-end yang telah kita lakukan pada pertemuan 2 dan 3. Untuk Back-end **TIDAK PERLU** ikut di-deploy ke VM, cukup dijalankan secara local.
+
+File Back-end dapat di-download melalui link di bawah:
+https://github.com/plirapli/asisten-tcc-2-api-be
+
+Silakan ikuti instruksi yg terdapat pada README.
 
 ## How to deploy to VM:
 
