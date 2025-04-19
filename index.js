@@ -1,65 +1,50 @@
 let port = 5000;
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
   port = prompt(
     'Masukkan port Back-End \nPort dapat dilihat pada file index.js pada bagian "app.listen" \n\nNilai default-nya adalah 5000'
-  );
+  ) || 5000;
   getUser();
 });
 
-// Ngambil elemen form
 const formulir = document.querySelector("form");
 
-// Bikin trigger event submit pada elemen form
 formulir.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // Ngambil elemen input
   const elemen_name = document.querySelector("#name");
-  const elemen_email = document.querySelector("#email");
-  const elemen_gender = document.querySelector("#gender");
+  const elemen_nim = document.querySelector("#nim");
+  const elemen_kelas = document.querySelector("#kelas");
 
-  // Ngambil value (nim) dari elemen input
   const name = elemen_name.value;
-  const email = elemen_email.value;
-  const gender = elemen_gender.value;
+  const nim = elemen_nim.value;
+  const kelas = elemen_kelas.value;
+  const id = elemen_name.dataset.id;
 
-  const id = elemen_name.dataset.id; // <- Khusus edit
-
-  // Ngecek apakah harus POST atau PUT
-  // Kalo id kosong, jadinya POST
-  if (id == "") {
-    // Tambah user
+  if (id === "") {
     axios
-      .post(`http://localhost:${port}/add-user`, { name, email, gender })
+      .post(`http://localhost:${port}/add-user`, { name, nim, kelas })
       .then(() => {
-        // bersihin formnya
         elemen_name.value = "";
-        elemen_email.value = "";
-        elemen_gender.value = "";
-
-        // manggil fungsi get user biar datanya di-refresh
+        elemen_nim.value = "";
+        elemen_kelas.value = "";
         getUser();
       })
-      .catch((error) => console.log(error.message)); // <- Kalo ada error
+      .catch((error) => console.log(error.message));
   } else {
     axios
-      .put(`http://localhost:${port}/edit-user/${id}`, { name, email, gender })
+      .put(`http://localhost:${port}/edit-user/${id}`, { name, nim, kelas })
       .then(() => {
-        // bersihin formnya
         elemen_name.dataset.id = "";
         elemen_name.value = "";
-        elemen_email.value = "";
-        elemen_gender.value = "";
-
-        // manggil fungsi get user biar datanya direfresh
+        elemen_nim.value = "";
+        elemen_kelas.value = "";
         getUser();
       })
-      .catch((error) => console.log(error)); // <- Kalo ada error
+      .catch((error) => console.log(error));
   }
 });
 
-// GET User
 async function getUser() {
   try {
     const { data } = await axios.get(`http://localhost:${port}/users`);
@@ -68,7 +53,7 @@ async function getUser() {
     let tampilan = "";
     let no = 1;
 
-    for (const user of await data) {
+    for (const user of data) {
       tampilan += tampilkanUser(no, user);
       no++;
     }
@@ -85,18 +70,18 @@ function tampilkanUser(no, user) {
     <tr>
       <td>${no}</td>
       <td class="name">${user.name}</td>
-      <td class="email">${user.email}</td>
-      <td class="gender">${user.gender}</td>
-      <td><button data-id=${user.id} class='btn-edit'>Edit</button></td>
-      <td><button data-id=${user.id} class='btn-hapus'>Hapus</button></td>
+      <td class="nim">${user.nim}</td>
+      <td class="kelas">${user.kelas}</td>
+      <td><button data-id="${user.id}" class='btn-edit'>Edit</button></td>
+      <td><button data-id="${user.id}" class='btn-hapus'>Hapus</button></td>
     </tr>
   `;
 }
 
 function hapusUser() {
-  const kumpulan_tombol_hapus = document.querySelectorAll(".btn-hapus");
+  const tombolHapus = document.querySelectorAll(".btn-hapus");
 
-  kumpulan_tombol_hapus.forEach((btn) => {
+  tombolHapus.forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.dataset.id;
       axios
@@ -108,35 +93,25 @@ function hapusUser() {
 }
 
 function editUser() {
-  const kumpulan_tombol_edit = document.querySelectorAll(".btn-edit");
+  const tombolEdit = document.querySelectorAll(".btn-edit");
 
-  kumpulan_tombol_edit.forEach((tombol_edit) => {
-    tombol_edit.addEventListener("click", () => {
-      // Ngambil value yg ada di form
-      const id = tombol_edit.dataset.id;
-      const name =
-        tombol_edit.parentElement.parentElement.querySelector(
-          ".name"
-        ).innerText;
-      const email =
-        tombol_edit.parentElement.parentElement.querySelector(
-          ".email"
-        ).innerText;
-      const gender =
-        tombol_edit.parentElement.parentElement.querySelector(
-          ".gender"
-        ).innerText;
+  tombolEdit.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const row = btn.closest("tr");
 
-      // Ngambil [elemen] input
+      const id = btn.dataset.id;
+      const name = row.querySelector(".name").innerText;
+      const nim = row.querySelector(".nim").innerText;
+      const kelas = row.querySelector(".kelas").innerText;
+
       const elemen_name = document.querySelector("#name");
-      const elemen_email = document.querySelector("#email");
-      const elemen_gender = document.querySelector("#gender");
+      const elemen_nim = document.querySelector("#nim");
+      const elemen_kelas = document.querySelector("#kelas");
 
-      // Masukkin value yang ada di baris yang dipilih ke form
       elemen_name.dataset.id = id;
       elemen_name.value = name;
-      elemen_email.value = email;
-      elemen_gender.value = gender;
+      elemen_nim.value = nim;
+      elemen_kelas.value = kelas;
     });
   });
 }
