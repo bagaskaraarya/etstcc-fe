@@ -5,16 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User</title>
     <style>
-      table,
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        padding: 2rem;
+        color: #333;
+      }
+
+      h1 {
+        color: #095793;
+      }
+
+      form {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        width: 200px;
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 0.6rem 1.2rem;
+        background-color: #095793;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #073f6b;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
       th,
       td {
-        border: 1px solid black;
-        border-collapse: collapse;
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      th {
+        background-color: #095793;
+        color: #fff;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      main {
+        margin-top: 2rem;
       }
     </style>
   </head>
   <body>
-    <h1>Data User</h1>
+    <h1>Data Mahasiswa</h1>
     <form>
       <span>
         <label for="name">Nama</label>
@@ -26,43 +100,44 @@
           required
         />
       </span>
-      <span style="margin-left: 1rem">
-        <label for="email">Email</label>
+      <span>
+        <label for="nim">NIM</label>
         <input
           data-id
-          id="email"
+          id="nim"
           type="text"
-          placeholder="Masukkan email"
+          placeholder="Masukkan NIM"
           required
         />
       </span>
-      <span style="margin-left: 1rem">
-        <label for="gender">Gender</label>
+      <span>
+        <label for="kelas">Kelas</label>
         <input
           data-id
-          id="gender"
+          id="kelas"
           type="text"
-          placeholder="Masukkan gender"
+          placeholder="Masukkan kelas"
           required
         />
       </span>
       <button type="submit">Simpan</button>
     </form>
-    <main style="margin-top: 1rem">
+
+    <main>
       <table>
         <thead>
           <tr>
             <th>No</th>
             <th>Nama</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th colspan="2">Option</th>
+            <th>NIM</th>
+            <th>Kelas</th>
+            <th colspan="2">Opsi</th>
           </tr>
         </thead>
-        <tbody id="table-user"></tbody>
+        <tbody id="table-user">
+          <!-- Data pengguna akan dimasukkan di sini -->
+        </tbody>
       </table>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="index.js"></script>
   </body>
 </html>
